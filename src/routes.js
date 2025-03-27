@@ -28,4 +28,9 @@ routes.get(
   PacienteController.listarPacientes
 );
 
+routes.delete(
+  "/deletar-paciente/:paciente_id",
+  AuthMiddleware,
+  PacienteController.deletarPaciente
+);
 export default routes;

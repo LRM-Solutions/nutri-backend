@@ -42,6 +42,25 @@ class PacienteController {
       return res.status(400).json({ error: error.message });
     }
   }
+
+  async deletarPaciente(req, res) {
+    const paciente_id = parseInt(req.params.paciente_id);
+
+    if (isNaN(paciente_id)) {
+      return res
+        .status(400)
+        .json({ error: "O ID do paciente deve ser um número válido" });
+    }
+
+    console.log(paciente_id);
+
+    try {
+      await PacienteService.deletarPaciente(paciente_id);
+      return res.status(200).json({ message: "Paciente deletado com sucesso" });
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  }
 }
 
 export default new PacienteController();

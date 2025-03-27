@@ -37,6 +37,18 @@ class PacienteService {
 
     return pacientes;
   }
+
+  async deletarPaciente(paciente_id) {
+    const paciente = await prisma.paciente.delete({
+      where: { paciente_id: paciente_id },
+    });
+
+    if (!paciente) {
+      throw new Error("Paciente não encontrado");
+    }
+
+    return paciente;
+  }
 }
 
 export default new PacienteService();
