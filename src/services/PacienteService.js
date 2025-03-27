@@ -49,6 +49,28 @@ class PacienteService {
 
     return paciente;
   }
+
+  async editarPaciente(
+    paciente_id,
+    paciente_nome,
+    paciente_cpf,
+    paciente_email
+  ) {
+    const paciente = await prisma.paciente.update({
+      where: { paciente_id: paciente_id },
+      data: {
+        paciente_nome: paciente_nome,
+        paciente_cpf: paciente_cpf,
+        paciente_email: paciente_email,
+      },
+    });
+
+    if (!paciente) {
+      throw new Error("Paciente não encontrado");
+    }
+
+    return paciente;
+  }
 }
 
 export default new PacienteService();

@@ -33,4 +33,10 @@ routes.delete(
   AuthMiddleware,
   PacienteController.deletarPaciente
 );
+
+routes.put(
+  "/editar-paciente/:paciente_id",
+  AuthMiddleware,
+  PacienteController.editarPaciente
+);
 export default routes;

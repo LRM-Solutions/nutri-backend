@@ -26,7 +26,9 @@ class PacienteController {
         paciente_email,
         paciente_senha
       );
-      return res.status(200).json(paciente);
+      return res
+        .status(200)
+        .json({ message: "Paciente cadastrado com sucesso!", paciente });
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
@@ -52,11 +54,38 @@ class PacienteController {
         .json({ error: "O ID do paciente deve ser um número válido" });
     }
 
-    console.log(paciente_id);
-
     try {
       await PacienteService.deletarPaciente(paciente_id);
       return res.status(200).json({ message: "Paciente deletado com sucesso" });
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  }
+
+  async editarPaciente(req, res) {
+    const paciente_id = parseInt(req.params.paciente_id);
+
+    if (isNaN(paciente_id)) {
+      return res
+        .status(400)
+        .json({ error: "O ID do paciente deve ser um número válido" });
+    }
+
+    try {
+      const { paciente_nome, paciente_cpf, paciente_email, paciente_senha } =
+        req.body;
+
+      const editarPaciente = await PacienteService.editarPaciente(
+        paciente_id,
+        paciente_nome,
+        paciente_cpf,
+        paciente_email
+      );
+
+      return res.status(200).json({
+        message: "Paciente editado com sucesso!",
+        paciente: editarPaciente,
+      });
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
