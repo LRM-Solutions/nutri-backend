@@ -28,6 +28,12 @@ routes.get(
   PacienteController.listarPacientes
 );
 
+routes.get(
+  "/buscar-paciente/:paciente_id",
+  AuthMiddleware,
+  PacienteController.buscarPaciente
+);
+
 routes.delete(
   "/deletar-paciente/:paciente_id",
   AuthMiddleware,

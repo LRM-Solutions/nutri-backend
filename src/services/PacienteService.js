@@ -71,6 +71,18 @@ class PacienteService {
 
     return paciente;
   }
+
+  async buscarPaciente(paciente_id) {
+    const paciente = await prisma.paciente.findFirst({
+      where: { paciente_id: paciente_id },
+    });
+
+    if (!paciente) {
+      throw new Error("Paciente não encontrado");
+    }
+
+    return paciente;
+  }
 }
 
 export default new PacienteService();
