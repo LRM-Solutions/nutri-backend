@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Nutricionista {
+  nutricionista_id    Int          @id @default(autoincrement())
+  nutricionista_nome  String
+  nutricionista_cpf   String       @unique
+  nutricionista_email String       @unique
+  nutricionista_senha String
+  assinaturas         Assinatura[]
+  exames              Exame[]
+  pacientes           Paciente[]
+}
+
+model Paciente {
+  paciente_id      Int           @id @default(autoincrement())
+  paciente_nome    String
+  paciente_cpf     String        @unique
+  paciente_email   String        @unique
+  nutricionista_id Int
+  paciente_senha   String
+  exames           Exame[]
+  Nutricionista    Nutricionista @relation(fields: [nutricionista_id], references: [nutricionista_id])
+}
+
+model Plano {
+  plano_id        Int          @id @default(autoincrement())
+  plano_descricao String
+  assinaturas     Assinatura[]
+}
+
+model Assinatura {
+  assinatura_id          Int           @id @default(autoincrement())
+  nutricionista_id       Int
+  plano_id               Int
+  assinatura_data_inicio DateTime      @default(now())
+  Nutricionista          Nutricionista @relation(fields: [nutricionista_id], references: [nutricionista_id])
+  Plano                  Plano         @relation(fields: [plano_id], references: [plano_id])
+}
+
+model Exame {
+  exame_id         Int           @id @default(autoincrement())
+  exame_descricao  String
+  exame_data       DateTime
+  nutricionista_id Int
+  paciente_id      Int
+  Nutricionista    Nutricionista @relation(fields: [nutricionista_id], references: [nutricionista_id])
+  Paciente         Paciente      @relation(fields: [paciente_id], references: [paciente_id])
+}
