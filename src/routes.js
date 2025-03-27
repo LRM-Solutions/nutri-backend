@@ -1,7 +1,9 @@
 import { Router } from "express";
 import sessionController from "./controllers/SessionController.js";
 import PacienteController from "./controllers/PacienteController.js";
+import ExameController from "./controllers/ExameController.js";
 import AuthMiddleware from "./middlewares/auth.js";
+
 const routes = new Router();
 
 routes.get("/", (req, res) => {
@@ -44,5 +46,15 @@ routes.put(
   "/editar-paciente/:paciente_id",
   AuthMiddleware,
   PacienteController.editarPaciente
+);
+
+// Rotas de Exames
+
+routes.post("/agendar-exame", AuthMiddleware, ExameController.agendarExame);
+routes.get("/listar-exames", AuthMiddleware, ExameController.listarExames);
+routes.delete(
+  "/deletar-exame/:exame_id",
+  AuthMiddleware,
+  ExameController.deletarExame
 );
 export default routes;
