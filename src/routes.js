@@ -30,6 +30,8 @@ routes.get(
   PacienteController.listarPacientes
 );
 
+console.log("ok")
+
 routes.get(
   "/buscar-paciente/:paciente_id",
   AuthMiddleware,
