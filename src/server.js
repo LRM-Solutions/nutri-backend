@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const server = app.listen(3333);
+const server = app.listen(3334);
 
 if (server) {
   console.log("Servidor rodando na porta => 3334");
