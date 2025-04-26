@@ -18,15 +18,39 @@ class ExameService {
 
     return exame;
   }
-
-  async listarExames(nutricionista_id) {
+  
+  async listarExames(nutricionista_id, data_inicio, data_fim) {
     const exames = await prisma.exame.findMany({
       where: {
-        nutricionista_id,
+        nutricionista_id, 
+      exame_data:{
+        gte: new Date(data_inicio),
+        lte: new Date(data_fim),
+        }
+      },
+      include:{
+        Paciente: {
+          select:{
+            paciente_id: true,
+            paciente_nome: true,
+            /*
+            
+            Se quiser retornar mais coisa so adicionar aqui
+
+            */  
+          }
+        }
       },
     });
+    // ARRUMA O JSON
+    const examesComPaciente = exames.map((exame) => ({
+      ...exame,
+      paciente_id: exame.Paciente.paciente_id,
+      paciente_nome: exame.Paciente.paciente_nome,
+      Paciente: undefined,
+    }));
 
-    return exames;
+    return examesComPaciente;
   }
 
   async deletarExame(exame_id) {

@@ -86,7 +86,6 @@ class SessionController {
 
     try {
       await schema.validate(req.body, { abortEarly: false });
-
       const { paciente_email, paciente_senha } = req.body;
 
       const user = await SessionService.loginPaciente(

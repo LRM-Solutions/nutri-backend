@@ -4,6 +4,7 @@ import * as Yup from "yup";
 class ExameController {
   async agendarExame(req, res) {
     const nutricionista_id = req.userId;
+    
     const schema = Yup.object().shape({
       paciente_id: Yup.string().required("É necessário informar o paciente"),
       exame_data: Yup.date()
@@ -31,13 +32,15 @@ class ExameController {
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
-  }
+  } 
 
   async listarExames(req, res) {
     const nutricionista_id = req.userId;
+    const { data_inicio, data_fim } = req.body;
+    // IDEAL DATA -> YYYY-MM-DD valida no front isso
 
     try {
-      const exames = await ExameService.listarExames(nutricionista_id);
+      const exames = await ExameService.listarExames(nutricionista_id, data_inicio, data_fim);
       return res.status(200).json(exames);
     } catch (error) {
       return res.status(400).json({ error: error.message });

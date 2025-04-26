@@ -7,6 +7,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/// ======================
+/// =       Nutricionista      =
+/// ======================
+
 model Nutricionista {
   nutricionista_id    Int          @id @default(autoincrement())
   nutricionista_nome  String
@@ -17,6 +21,10 @@ model Nutricionista {
   exames              Exame[]
   pacientes           Paciente[]
 }
+
+/// ======================
+/// =       Paciente      =
+/// ======================
 
 model Paciente {
   paciente_id      Int           @id @default(autoincrement())
@@ -44,6 +52,10 @@ model Assinatura {
   Plano                  Plano         @relation(fields: [plano_id], references: [plano_id])
 }
 
+/// ======================
+/// =       Exame      =
+/// ======================
+
 model Exame {
   exame_id         Int           @id @default(autoincrement())
   exame_descricao  String
@@ -52,4 +64,87 @@ model Exame {
   paciente_id      Int
   Nutricionista    Nutricionista @relation(fields: [nutricionista_id], references: [nutricionista_id])
   Paciente         Paciente      @relation(fields: [paciente_id], references: [paciente_id])
+  antropometrica Antropometria[]
 }
+
+/// ======================
+/// =       Antropometria      =
+/// ======================
+
+model Antropometria {
+  antropometria_id Int   @id @default(autoincrement())
+  exame_id         Int @unique
+  Exame            Exame @relation(fields: [exame_id], references: [exame_id])
+}
+
+model DadosBasicosAntropometria {
+  dadobasico_id               Int    @id @default(autoincrement())
+  antropometria_id  Int    @unique
+  tipoPaciente     Int
+  altura           Float
+  alturaSentado    Float?
+  alturaJoelho     Float?
+  peso             Float
+  sexo             String?
+  relatorioAnexo   String?
+  dataColeta       DateTime @default(now())
+
+  antropometria    Antropometria @relation(fields: [antropometriaId], references: [id])
+}
+
+
+// Corrigir
+model Bioimpedancia {
+  bioimpedancia_id    Int      @id @default(autoincrement())
+  antropometria_id     Int
+  percentGordura      Float?
+  percentMassaMagra   Float?
+  massaGorda          Float?
+  massaMagra          Float?
+  pesoOsseo           Float?
+  aguaCorporal        Float?
+  idadeMetabolica     Int?
+  dataColeta          DateTime @default(now())
+
+  // Relações
+  antropometria       Antropometria @relation(fields: [antropometria_id], references: [antropometria_id])
+} 
+
+model DobrasCutaneas {
+  dobracutanea_id               Int    @id @default(autoincrement())
+  antropometria_id  Int
+  tricipal         Float?
+  bicipital        Float?
+  subescapular     Float?
+  suprailiaca      Float?
+  abdominal        Float?
+  coxa             Float?
+  peitoral         Float?
+  axiliarMedia     Float?
+  dataColeta       DateTime @default(now())
+
+  antropometria    Antropometria @relation(fields: [antropometria_id], references: [antropometria_id])
+}
+
+
+
+
+
+
+
+
+
+/// ======================
+/// =      Anamnesse     =
+/// ======================
+
+
+
+
+
+
+
+/// ======================
+/// = Gastos Energéticos =
+/// ======================
+

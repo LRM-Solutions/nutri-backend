@@ -10,13 +10,19 @@ routes.get("/", (req, res) => {
   return res.status(200).json({ ok: true });
 });
 
-// Rotas Session Controller
+/// ======================
+/// =       Session      =
+/// ======================
+
 
 routes.post("/cadastro-nutri", sessionController.cadastroNutri);
 routes.post("/login-nutri", sessionController.loginNutri);
 routes.post("/login-paciente", sessionController.loginPaciente);
 
-// Rotas de Pacientes
+/// ======================
+/// =     PACIENTE      =
+/// ======================
+
 
 routes.post(
   "/cadastro-paciente",
@@ -29,8 +35,6 @@ routes.get(
   AuthMiddleware,
   PacienteController.listarPacientes
 );
-
-console.log("ok")
 
 routes.get(
   "/buscar-paciente/:paciente_id",
@@ -50,13 +54,23 @@ routes.put(
   PacienteController.editarPaciente
 );
 
-// Rotas de Exames
+/// ======================
+/// =       EXAMES      =
+/// ======================
+
 
 routes.post("/agendar-exame", AuthMiddleware, ExameController.agendarExame);
+
 routes.get("/listar-exames", AuthMiddleware, ExameController.listarExames);
+
 routes.delete(
   "/deletar-exame/:exame_id",
   AuthMiddleware,
   ExameController.deletarExame
 );
+
+
+
+
+
 export default routes;
