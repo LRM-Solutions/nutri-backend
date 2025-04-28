@@ -3,6 +3,8 @@ import sessionController from "./controllers/SessionController.js";
 import PacienteController from "./controllers/PacienteController.js";
 import ExameController from "./controllers/ExameController.js";
 import AuthMiddleware from "./middlewares/auth.js";
+import AntropometriaController from "./controllers/AntropometriaController.js";
+import DadosBasicosController from "./controllers/antropometria/DadosBasicosController.js";
 
 const routes = new Router();
 
@@ -70,7 +72,26 @@ routes.delete(
 );
 
 
+/// ======================
+/// =   ANTROPOMETRIA   =
+/// ======================
 
+routes.post("/exames/:exame_id/criar-antropometria",
+  AuthMiddleware,
+  AntropometriaController.criarAntropometria
+);
 
+routes.post("/antropometria/:antropometria_id/dados-basicos",
+  AuthMiddleware,
+  DadosBasicosController.criar
+)
+
+/*
+POST /antropometria/:id/bioimpedancia
+
+POST /antropometria/:antropometria_id/dados-basicos
+
+POST /antropometria/:id/diametro-osseo
+*/
 
 export default routes;

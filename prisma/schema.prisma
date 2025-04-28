@@ -53,7 +53,7 @@ model Assinatura {
 }
 
 /// ======================
-/// =       Exame      =
+/// =       Exame        =
 /// ======================
 
 model Exame {
@@ -68,13 +68,19 @@ model Exame {
 }
 
 /// ======================
-/// =       Antropometria      =
+/// =    Antropometria   =
 /// ======================
 
 model Antropometria {
   antropometria_id Int   @id @default(autoincrement())
   exame_id         Int @unique
+  antropometria_data       DateTime
+  
   Exame            Exame @relation(fields: [exame_id], references: [exame_id])
+  
+  dadosBasicos     DadosBasicosAntropometria[]
+  dobraCutanea     DobraCutanea[]
+  bioimpedancia    Bioimpedancia[]
 }
 
 model DadosBasicosAntropometria {
@@ -89,14 +95,14 @@ model DadosBasicosAntropometria {
   relatorioAnexo   String?
   dataColeta       DateTime @default(now())
 
-  antropometria    Antropometria @relation(fields: [antropometriaId], references: [id])
+  antropometria    Antropometria @relation(fields: [antropometria_id], references: [antropometria_id])
 }
 
 
 // Corrigir
 model Bioimpedancia {
   bioimpedancia_id    Int      @id @default(autoincrement())
-  antropometria_id     Int
+  antropometria_id    Int @unique
   percentGordura      Float?
   percentMassaMagra   Float?
   massaGorda          Float?
@@ -110,9 +116,9 @@ model Bioimpedancia {
   antropometria       Antropometria @relation(fields: [antropometria_id], references: [antropometria_id])
 } 
 
-model DobrasCutaneas {
+model DobraCutanea {
   dobracutanea_id               Int    @id @default(autoincrement())
-  antropometria_id  Int
+  antropometria_id  Int @unique
   tricipal         Float?
   bicipital        Float?
   subescapular     Float?
@@ -126,20 +132,9 @@ model DobrasCutaneas {
   antropometria    Antropometria @relation(fields: [antropometria_id], references: [antropometria_id])
 }
 
-
-
-
-
-
-
-
-
 /// ======================
 /// =      Anamnesse     =
 /// ======================
-
-
-
 
 
 
