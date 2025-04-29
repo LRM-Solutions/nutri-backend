@@ -39,6 +39,12 @@ class DadosBasicosController {
       return res.status(400).json({ error: error.message });
     }      
   }
+  async editar(req,res){
+
+  }
+  async deletar(req,res){
+
+  }
 }
   
   export default new DadosBasicosController();

@@ -1,4 +1,4 @@
-import { prisma } from "../config/prisma.js";
+import { prisma } from "../../config/prisma.js";
 
 class AntropometriaService {
   async criarAntropometria(exame_id, nutricionista_id){
@@ -36,6 +36,18 @@ class AntropometriaService {
     
     //console.log(antropometria);
     return antropometria;
+  }
+  async deletarAntropometria(antropometria_id, nutricionista_id){
+    // Valida se o exame_id.nutricionista_id = nutricionista_id
+
+    const deletedAntropometria = await prisma.antropometria.delete({
+      where:{
+        antropometria_id : antropometria_id
+      }
+    })
+
+
+
   }
 }
 

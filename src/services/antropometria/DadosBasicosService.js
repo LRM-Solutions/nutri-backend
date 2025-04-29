@@ -27,20 +27,20 @@ class DadosBasicosService {
     }
 
       
-      // Requisita banco
+    // Requisita banco
 
-      const DadosBasicos = await prisma.dadosBasicosAntropometria.create({
+    const DadosBasicos = await prisma.dadosBasicosAntropometria.create({
         data:{
           ...data,
           antropometria_id: antropometria_id
         }
       });
 
-      if(!DadosBasicos){
-        throw new Error("Erro ao criar no banco de dados")
-      }
+    if(!DadosBasicos){
+      throw new Error("Erro ao criar no banco de dados")
+    }
 
-      return DadosBasicos
+    return DadosBasicos
     }
   }
   
