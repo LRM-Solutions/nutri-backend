@@ -1,6 +1,5 @@
 import BioImpedanciaService from "../../services/antropometria/BioImpedanciaService.js";
 import * as Yup from "yup";
-import { prisma } from "../../config/prisma.js";
 
 class BioImpedanciaController {
   async criar(req,res){
@@ -18,8 +17,8 @@ class BioImpedanciaController {
     const antropometria_id = parseInt(req.params.antropometria_id)
     const nutricionista_id = req.userId;
 
-    if(!antropometria_id){
-      return res.status(400).json({ error: "Antropometria Id não presente na URL"});
+    if(isNaN(antropometria_id)){
+      return res.status(400).json({ error: "Antropometria Id não presente na URL ou não é um Número!"});
     }
     if(!nutricionista_id){
       return res.status(400).json({ error: "Nutricionista Id não presente no token"});
@@ -76,9 +75,29 @@ class BioImpedanciaController {
     }
   }
   async delete(req,res){
+    const bioimpedancia_id = parseInt(req.params.bioimpedancia_id)
+    const nutricionista_id = req.userId;
 
+    if(!bioimpedancia_id){
+      return res.status(400).json({ error: "BioImpedancia Id não presente na URL"});
+    }
+    if(!nutricionista_id){
+      return res.status(400).json({ error: "Nutricionista Id não presente no token"});
+    }
+    
+    try{
+
+      const bioimpedancia = await BioImpedanciaService.delete(nutricionista_id, bioimpedancia_id);
+
+      if(!bioimpedancia){
+        return res.status(404).json({ error: "Não foi possivel completar a requisição!"});
+      }
+
+      return res.status(201).json(bioimpedancia);
+    }catch(error){
+      return res.status(400).json({ error: error.message });
+    }
   }
 }
   
 export default new BioImpedanciaController();
-  

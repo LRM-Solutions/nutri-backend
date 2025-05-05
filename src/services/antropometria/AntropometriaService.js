@@ -40,14 +40,31 @@ class AntropometriaService {
   async deletarAntropometria(antropometria_id, nutricionista_id){
     // Valida se o exame_id.nutricionista_id = nutricionista_id
 
+    const resultado = await prisma.antropometria.findUnique({
+      where: {
+        antropometria_id:antropometria_id
+      },
+      select: {
+        Exame: {
+          select: {
+            nutricionista_id: true
+          }
+        }
+      }
+    });
+
+    const id = resultado?.Exame?.nutricionista_id;
+    if(id != nutricionista_id){
+      throw new Error("Erro! Essa antropometria pertence a outro nutricionista!")
+    }
+
     const deletedAntropometria = await prisma.antropometria.delete({
       where:{
         antropometria_id : antropometria_id
       }
     })
 
-
-
+    return deletedAntropometria;
   }
 }
 

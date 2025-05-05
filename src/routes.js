@@ -82,6 +82,11 @@ routes.post("/exames/:exame_id/criar-antropometria",
   AntropometriaController.criarAntropometria
 );
 
+routes.delete("/exames/deletar-antropometria/:antropometria_id",
+  AuthMiddleware,
+  AntropometriaController.deletarAntropometria
+);
+
 
 /// ======================
 /// =   DADOS BASICOS   =
@@ -90,6 +95,16 @@ routes.post("/exames/:exame_id/criar-antropometria",
 routes.post("/antropometria/:antropometria_id/dados-basicos",
   AuthMiddleware,
   DadosBasicosController.criar
+)
+
+routes.put("/antropometria/dados-basicos/:dadobasico_id",
+  AuthMiddleware,
+  DadosBasicosController.update
+)
+
+routes.delete("/antropometria/dados-basicos/:dadobasico_id",
+  AuthMiddleware,
+  DadosBasicosController.deletar
 )
 
 
@@ -107,6 +122,10 @@ routes.put("/antropometria/bioimpedancia/:bioimpedancia_id",
   BioImpedanciaController.update  
 )
 
+routes.delete("/antropometria/bioimpedancia/:bioimpedancia_id",
+  AuthMiddleware,
+  BioImpedanciaController.delete
+)
 /*
 POST /antropometria/:id/bioimpedancia
 

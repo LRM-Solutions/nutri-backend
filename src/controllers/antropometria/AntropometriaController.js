@@ -24,17 +24,17 @@ class AntropometriaController {
   } 
 
   async deletarAntropometria(req, res) {
-    const exame_id = parseInt(req.params.exame_id)
+    const antropometria_id = parseInt(req.params.antropometria_id)
     const nutricionista_id = req.userId;
 
-    if(isNaN(exame_id)){
+    if(isNaN(antropometria_id)){
       return res.status(400).json({
         error: "O ID deve ser um número válido!"
       })
     }
     
     try{
-      const antropometria = await AntropometriaService.deletarAntropometria(exame_id, nutricionista_id);
+      const antropometria = await AntropometriaService.deletarAntropometria(antropometria_id, nutricionista_id);
       
       if(!antropometria){
         return res.status(404).json({ error: "Não foi possivel completar a requisição!"});

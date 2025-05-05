@@ -1,5 +1,10 @@
 import { prisma } from "../../config/prisma.js";
-  
+
+// Para evitar repetição de código 
+// Pode separar essa verificação ( dos selects ) que faz 
+// requisição ao banco em
+// Um Arquivo separado.
+
 class BioImpedanciaService{
   async criar(data, nutricionista_id, antropometria_id){
 
@@ -29,8 +34,6 @@ class BioImpedanciaService{
     return BioImpedancia;
   }
   async update(data, nutricionista_id, bioimpedancia_id){
-    // VALIDAÇÃO DO ID DA BIO_IMPEDANCIA = Nutricionista    
-
     const resultado = await prisma.bioimpedancia.findUnique({
       where: {
         bioimpedancia_id: bioimpedancia_id
@@ -48,11 +51,7 @@ class BioImpedanciaService{
       }
     });
 
-    //console.log('Resultado da busca Prisma:', JSON.stringify(resultado, null, 2));
-    const nutricionista_id_encontrado = resultado?.antropometria?.Exame?.nutricionista_id;
-    
-    //console.log(nutricionista_id_encontrado)
-    //console.log(nutricionista_id)
+    const nutricionista_id_encontrado = resultado?.antropometria?.Exame?.nutricionista_id
 
     if (nutricionista_id_encontrado !== nutricionista_id) {
       throw new Error("Erro! A bioimpedância pertence a outro nutricionista!");
@@ -68,15 +67,43 @@ class BioImpedanciaService{
       }
     });
     
-    //console.log(updatedBioimpedancia);
-
     return updatedBioimpedancia;
-
   }
   async delete(nutricionista_id, bioimpedancia_id){
     
+    const resultado = await prisma.bioimpedancia.findUnique({
+      where: {
+        bioimpedancia_id: bioimpedancia_id
+      },
+      select: {
+        antropometria:{
+          select:{
+            Exame:{
+              select:{
+                nutricionista_id: true
+              }
+            }
+          }
+        }
+      }
+    });  
+    
+    const nutricionista_id_encontrado = resultado?.antropometria?.Exame?.nutricionista_id;
+  
+    if (nutricionista_id_encontrado !== nutricionista_id) {
+      throw new Error("Erro! A bioimpedância pertence a outro nutricionista!");
+    }
+
+    // Nutri validado só excluir agora
+
+    const deletedBioimpedancia = await prisma.bioimpedancia.delete({
+      where:{
+        bioimpedancia_id: bioimpedancia_id
+      }
+    });
+
+    return deletedBioimpedancia;
   }
 }
 
 export default new BioImpedanciaService();
-  
