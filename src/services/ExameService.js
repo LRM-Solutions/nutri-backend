@@ -61,6 +61,18 @@ class ExameService {
     });
     return;
   }
+  // Nutricionista tem que ser válidado ainda!
+
+  // !!!!!!!!!!!!!!!!!11
+  async listarExameById(nutricionista_id, paciente_id){
+    const exames = await prisma.exame.findMany({
+      where:{
+        paciente_id: paciente_id
+      }
+    })
+    
+    return exames;
+  }
 }
 
 export default new ExameService();

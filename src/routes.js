@@ -73,6 +73,7 @@ routes.delete(
   ExameController.deletarExame
 );
 
+routes.get('/listar-exames-por-paciente/:paciente_id', AuthMiddleware, ExameController.listarExameById )
 
 /// ======================
 /// =   ANTROPOMETRIA   =

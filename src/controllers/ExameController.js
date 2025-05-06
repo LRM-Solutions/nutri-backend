@@ -34,6 +34,21 @@ class ExameController {
     }
   } 
 
+  async listarExameById(req,res){
+    const { paciente_id } = req.params.paciente_id
+    const nutricionista_id = req.userId
+    // faz dps
+
+    try{
+      const exames = await ExameService.listarExameById(nutricionista_id, paciente_id)
+      
+      return res.status(201).json(exames);
+    }catch(error){
+      console.log(error)
+      return res.status(400).json({ error: error.message})
+    }
+  }
+
   async listarExames(req, res) {
     const nutricionista_id = req.userId;
     const { data_inicio, data_fim } = req.body;
