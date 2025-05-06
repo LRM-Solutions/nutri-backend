@@ -6,6 +6,7 @@ import AuthMiddleware from "./middlewares/auth.js";
 import AntropometriaController from "./controllers/antropometria/AntropometriaController.js";
 import DadosBasicosController from "./controllers/antropometria/DadosBasicosController.js";
 import BioImpedanciaController from "./controllers/antropometria/BioImpedanciaController.js"
+import AnamnesePerguntasController from "../src/controllers/anamnese/AnamnesePerguntasController.js"
 
 const routes = new Router();
 
@@ -64,7 +65,7 @@ routes.put(
 
 routes.post("/agendar-exame", AuthMiddleware, ExameController.agendarExame);
 
-routes.get("/listar-exames", AuthMiddleware, ExameController.listarExames);
+routes.post("/listar-exames", AuthMiddleware, ExameController.listarExames);
 
 routes.delete(
   "/deletar-exame/:exame_id",
@@ -131,5 +132,25 @@ POST /antropometria/:id/bioimpedancia
 
 POST /antropometria/:id/diametro-osseo
 */
+
+/// ======================
+/// =    BIOIMPEDANCIA   =
+/// ======================
+
+routes.post("/anamnese-personalizada",
+  AuthMiddleware,
+  AnamnesePerguntasController.create
+)
+
+routes.put("/anamnese-personalizada/:anamneseperguntasid",
+  AuthMiddleware,
+  AnamnesePerguntasController.update
+)
+
+routes.delete("/anamnese-personalizada/:anamneseperguntasid",
+  AuthMiddleware,
+  AnamnesePerguntasController.delete
+)
+
 
 export default routes;

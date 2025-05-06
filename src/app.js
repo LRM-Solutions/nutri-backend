@@ -1,6 +1,7 @@
 import express from "express";
 import routes from "./routes.js";
 import cors from "cors";
+import { swaggerUi, specs } from "../src/config/swagger.js" // importe o Swagger
 
 class app {
   constructor() {
@@ -13,6 +14,7 @@ class app {
     this.server.use(cors());
   }
   routes() {
+    this.server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
     this.server.use(routes);
   }
 }
