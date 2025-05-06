@@ -12,11 +12,11 @@ const options = {
     },
     servers: [
       {
-        url: 'https://fittrack.lrmsolutions.com.br',
+        url: 'http://localhost:3334',
       },
     ],
   },
-  apis: ['./routes/*.js'], // ajuste o caminho conforme sua estrutura
+  apis: ['./docs/*.js'], // ajuste o caminho conforme sua estrutura
 };
 
 const specs = swaggerJsdoc(options);

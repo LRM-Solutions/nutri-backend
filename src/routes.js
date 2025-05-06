@@ -7,6 +7,7 @@ import AntropometriaController from "./controllers/antropometria/AntropometriaCo
 import DadosBasicosController from "./controllers/antropometria/DadosBasicosController.js";
 import BioImpedanciaController from "./controllers/antropometria/BioImpedanciaController.js"
 import AnamnesePerguntasController from "../src/controllers/anamnese/AnamnesePerguntasController.js"
+import AnamneseController from "../src/controllers/anamnese/AnamneseController.js"
 
 const routes = new Router();
 
@@ -135,7 +136,7 @@ POST /antropometria/:id/diametro-osseo
 */
 
 /// ======================
-/// =    BIOIMPEDANCIA   =
+/// ANAMNESE PERGUNTAS   =
 /// ======================
 
 routes.post("/anamnese-personalizada",
@@ -153,5 +154,22 @@ routes.delete("/anamnese-personalizada/:anamneseperguntasid",
   AnamnesePerguntasController.delete
 )
 
+/// ======================
+///  =     ANAMNESE    =
+/// ======================
 
+routes.post("/criar-anamnese/", 
+  AuthMiddleware, 
+  AnamneseController.criar
+)
+
+routes.put("/editar-anamnese/:anamnese_id", 
+  AuthMiddleware, 
+  AnamneseController.editar
+)
+
+routes.delete("/deletar-anamnese/:anamnese_id",
+  AuthMiddleware,
+  AnamneseController.deletar
+)
 export default routes;
