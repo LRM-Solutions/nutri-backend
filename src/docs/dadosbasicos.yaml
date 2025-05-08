@@ -127,3 +127,21 @@ paths:
           description: Dados básicos não encontrados
         '401':
           description: Não autorizado
+    delete:
+      summary: Deleta dados básicos
+      tags:
+        - Dados Básicos
+      parameters:
+        - name: dadobasico_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID dos dados básicos a serem deletados
+      responses:
+        '200':
+          description: Dados básicos deletados com sucesso
+        '404':
+          description: Dados básicos não encontrados
+        '401':
+          description: Não autorizado

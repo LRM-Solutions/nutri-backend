@@ -129,11 +129,26 @@ routes.delete("/antropometria/bioimpedancia/:bioimpedancia_id",
   AuthMiddleware,
   BioImpedanciaController.delete
 )
-/*
-POST /antropometria/:id/bioimpedancia
 
-POST /antropometria/:id/diametro-osseo
-*/
+
+/// ======================
+/// = Dobras Cutaneas    =
+/// ======================
+
+routes.post("/antropometria/:antropometria_id/dobrasCutaneas",
+  AuthMiddleware,
+  DobrasCutaneasController.criar
+)
+
+routes.put("/antropometria/dobrasCutaneas/:dobraCutanea_id",
+  AuthMiddleware,
+  DobrasCutaneasController.update
+)
+
+routes.delete("/antropometria/dobrasCutaneas/:dobraCutanea_id",
+  AuthMiddleware,
+  DobrasCutaneasController.deletar
+)
 
 /// ======================
 /// ANAMNESE PERGUNTAS   =
@@ -171,25 +186,6 @@ routes.put("/editar-anamnese/:anamnese_id",
 routes.delete("/deletar-anamnese/:anamnese_id",
   AuthMiddleware,
   AnamneseController.deletar
-)
-
-/// ======================
-/// = Dobras Cutaneas    =
-/// ======================
-
-routes.post("/antropometria/:antropometria_id/dobrasCutaneas",
-  AuthMiddleware,
-  DobrasCutaneasController.criar
-)
-
-routes.put("/antropometria/dobrasCutaneas/:dobraCutanea_id",
-  AuthMiddleware,
-  DobrasCutaneasController.update
-)
-
-routes.delete("/antropometria/dobrasCutaneas/:dobraCutanea_id",
-  AuthMiddleware,
-  DobrasCutaneasController.deletar
 )
 
 
