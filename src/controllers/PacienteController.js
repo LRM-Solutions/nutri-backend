@@ -72,8 +72,7 @@ class PacienteController {
     }
 
     try {
-      const { paciente_nome, paciente_cpf, paciente_email, paciente_senha } =
-        req.body;
+      const { paciente_nome, paciente_cpf, paciente_email, paciente_senha } = req.body;
 
       const editarPaciente = await PacienteService.editarPaciente(
         paciente_id,

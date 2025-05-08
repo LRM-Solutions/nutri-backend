@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: API 
+  version: "1.0.0"
+  description: Rotas Antropometria Dados Basicos
+
+servers:
+  - url: http://localhost:3334
+
+paths:
+  /antropometria/{antropometria_id}/dados-basicos:
+    post:
+      summary: Cria dados básicos vinculados a uma antropometria
+      tags:
+        - Dados Básicos
+      parameters:
+        - name: antropometria_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da antropometria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tipoPaciente
+                - altura
+                - peso
+              properties:
+                tipoPaciente:
+                  type: integer
+                  description: Tipo de paciente (inteiro)
+                  example: 1
+                altura:
+                  type: number
+                  format: float
+                  description: Altura do paciente em metros
+                  example: 1.75
+                alturaSentado:
+                  type: number
+                  format: float
+                  nullable: true
+                  description: Altura sentado (opcional)
+                  example: 0.90
+                alturaJoelho:
+                  type: number
+                  format: float
+                  nullable: true
+                  description: Altura do joelho (opcional)
+                  example: 0.50
+                peso:
+                  type: number
+                  format: float
+                  description: Peso do paciente em kg
+                  example: 70.5
+                sexo:
+                  type: string
+                  nullable: true
+                  description: Sexo do paciente (opcional)
+                  example: "Masculino"
+                relatorioAnexo:
+                  type: string
+                  nullable: true
+                  description: Ignora por enquanto
+                  example: ""
+      responses:
+        '201':
+          description: Dados básicos criados com sucesso
+        '400':
+          description: Erro de validação ou dados incorretos
+        '404':
+          description: Antropometria não encontrada
+        '401':
+          description: Não autorizado
+
+  /antropometria/dados-basicos/{dadobasico_id}:
+    put:
+      summary: Atualiza dados básicos existentes
+      tags:
+        - Dados Básicos
+      parameters:
+        - name: dadobasico_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID dos dados básicos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tipoPaciente:
+                  type: integer
+                altura:
+                  type: number
+                  format: float
+                alturaSentado:
+                  type: number
+                  format: float
+                  nullable: true
+                alturaJoelho:
+                  type: number
+                  format: float
+                  nullable: true
+                peso:
+                  type: number
+                  format: float
+                sexo:
+                  type: string
+                  nullable: true
+                relatorioAnexo:
+                  type: string
+                  nullable: true
+      responses:
+        '200':
+          description: Dados básicos atualizados com sucesso
+        '400':
+          description: Dados inválidos
+        '404':
+          description: Dados básicos não encontrados
+        '401':
+          description: Não autorizado

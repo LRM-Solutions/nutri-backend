@@ -8,6 +8,7 @@ import DadosBasicosController from "./controllers/antropometria/DadosBasicosCont
 import BioImpedanciaController from "./controllers/antropometria/BioImpedanciaController.js"
 import AnamnesePerguntasController from "../src/controllers/anamnese/AnamnesePerguntasController.js"
 import AnamneseController from "../src/controllers/anamnese/AnamneseController.js"
+import DobrasCutaneasController from "./controllers/antropometria/DobrasCutaneasController.js";
 
 const routes = new Router();
 
@@ -24,16 +25,15 @@ routes.post("/cadastro-nutri", sessionController.cadastroNutri);
 routes.post("/login-nutri", sessionController.loginNutri);
 routes.post("/login-paciente", sessionController.loginPaciente);
 
-/// ======================
-/// =     PACIENTE      =
-/// ======================
-
-
 routes.post(
   "/cadastro-paciente",
   AuthMiddleware,
   PacienteController.cadastrarPaciente
 );
+/// ======================
+/// =     PACIENTE      =
+/// ======================
+
 
 routes.get(
   "/listar-pacientes",
@@ -172,4 +172,27 @@ routes.delete("/deletar-anamnese/:anamnese_id",
   AuthMiddleware,
   AnamneseController.deletar
 )
+
+/// ======================
+/// = Dobras Cutaneas    =
+/// ======================
+
+routes.post("/antropometria/:antropometria_id/dobrasCutaneas",
+  AuthMiddleware,
+  DobrasCutaneasController.criar
+)
+
+routes.put("/antropometria/dobrasCutaneas/:dobraCutanea_id",
+  AuthMiddleware,
+  DobrasCutaneasController.update
+)
+
+routes.delete("/antropometria/dobrasCutaneas/:dobraCutanea_id",
+  AuthMiddleware,
+  DobrasCutaneasController.deletar
+)
+
+
+
+
 export default routes;

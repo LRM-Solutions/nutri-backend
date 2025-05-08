@@ -37,7 +37,6 @@ class ExameController {
   async listarExameById(req,res){
     const { paciente_id } = req.params.paciente_id
     const nutricionista_id = req.userId
-    // faz dps
 
     try{
       const exames = await ExameService.listarExameById(nutricionista_id, paciente_id)

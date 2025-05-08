@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  title: API 
+  version: "1.0.0"
+  description: Rotas da antropometria
+
+servers:
+  - url: http://localhost:3334
+
+paths:
+  /exames/{exame_id}/criar-antropometria:
+    post:
+      summary: Cria um exame de antropometria vinculado a um exame existente
+      tags:
+        - Antropometria
+      parameters:
+        - name: exame_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do exame ao qual a antropometria será vinculada
+      responses:
+        '201':
+          description: Antropometria criada com sucesso
+        '400':
+          description: Requisição inválida
+        '404':
+          description: Exame não encontrado
+        '401':
+          description: Não autorizado
+
+  /exames/deletar-antropometria/{antropometria_id}:
+    delete:
+      summary: Deleta uma antropometria pelo ID Antropometria
+      tags:
+        - Antropometria
+      parameters:
+        - name: antropometria_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da antropometria a ser deletada
+      responses:
+        '200':
+          description: Antropometria deletada com sucesso
+        '404':
+          description: Antropometria não encontrada
+        '401':
+          description: Não autorizado

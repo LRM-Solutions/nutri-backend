@@ -102,7 +102,7 @@ model DadosBasicosAntropometria {
 }
 
 
-// Corrigir
+//
 model Bioimpedancia {
   bioimpedancia_id    Int      @id @default(autoincrement())
   antropometria_id    Int @unique

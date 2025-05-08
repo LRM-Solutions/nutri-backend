@@ -1,0 +1,159 @@
+openapi: 3.0.0
+info:
+  title: API 
+  version: "1.0.0"
+  description: Rotas dos exames
+
+servers:
+  - url: http://localhost:3334
+
+paths:
+  /agendar-exame:
+    post:
+      summary: Agenda um exame para um paciente
+      tags:
+        - Exame
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - paciente_id
+                - exame_data
+                - exame_descricao
+              properties:
+                paciente_id:
+                  type: string
+                  description: ID do paciente
+                  example: "123abc"
+                exame_data:
+                  type: string
+                  format: date
+                  description: Data do exame
+                  example: "2024-04-27T00:00:00.000Z"
+                exame_descricao:
+                  type: string
+                  description: Descrição do exame
+                  example: "Exame de sangue completo"
+      responses:
+        '201':
+          description: Exame agendado com sucesso
+        '400':
+          description: Requisição inválida (dados ausentes ou incorretos)
+        '401':
+          description: Não autorizado
+          
+  /listar-exames:
+    post:
+      summary: Lista os exames agendados filtrando por data
+      tags:
+        - Exame
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data_inicio:
+                  type: string
+                  format: date
+                  description: Data inicial para o filtro (formato YYYY-MM-DD)
+                  example: "2024-03-27T00:00:00.000Z"
+                data_fim:
+                  type: string
+                  format: date
+                  description: Data final para o filtro (formato YYYY-MM-DD)
+                  example: "2026-03-27T00:00:00.000Z"
+      responses:
+        '200':
+          description: Lista de exames retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    exame_id:
+                      type: string
+                    exame_data:
+                      type: string
+                      format: date
+                    exame_descricao:
+                      type: string
+                    paciente_id:
+                      type: string
+                    paciente_nome:
+                      type: string
+                    nutricionista_id:
+                      type: String
+        '400':
+          description: Erro ao buscar os exames
+        '401':
+          description: Não autorizado
+
+  /deletar-exame/{exame_id}:
+    delete:
+      summary: Deleta um exame pelo ID
+      tags:
+        - Exame
+      parameters:
+        - name: exame_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do exame a ser deletado
+      responses:
+        '200':
+          description: Exame deletado com sucesso
+        '404':
+          description: Exame não encontrado
+        '401':
+          description: Não autorizado
+
+  /listar-exames-por-paciente/{paciente_id}:
+    get:
+      summary: Lista os exames de um paciente pelo ID
+      tags:
+        - Exame
+      parameters:
+        - name: paciente_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do paciente para listar os exames
+      responses:
+        '200':
+          description: Lista de exames retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    exame_id:
+                      type: string
+                    exame_data:
+                      type: string
+                      format: date
+                    exame_descricao:
+                      type: string
+                    paciente_id:
+                      type: string
+                    nutricionista_id:
+                      type: string
+        '404':
+          description: Paciente não encontrado
+        '401':
+          description: Não autorizado
+

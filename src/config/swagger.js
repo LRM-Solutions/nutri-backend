@@ -1,24 +1,23 @@
-// swagger.js
-import swaggerJsdoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'FitTrack API',
-      version: '1.0.0',
-      description: 'Documentação da API do FitTrack',
+      title: "API de Nutrição",
+      version: "1.0.0",
+      description: "Documentação da API para gestão de nutricionistas e pacientes.",
     },
     servers: [
       {
-        url: 'http://localhost:3334',
+        url: "http://localhost:3333", // ou sua URL de produção
       },
     ],
   },
-  apis: ['./docs/*.js'], // ajuste o caminho conforme sua estrutura
+  apis: ["./src/routes.js", "./src/docs/*.yaml"], // ponto importante
 };
 
-const specs = swaggerJsdoc(options);
+const swaggerSpec = swaggerJSDoc(options);
 
-export { swaggerUi, specs };
+export { swaggerSpec, swaggerUi };

@@ -1,0 +1,141 @@
+openapi: 3.0.0
+info:
+  title: API de Sessões
+  version: "1.0.0"
+  description: Rotas de autenticação e cadastro de nutricionistas e pacientes
+
+servers:
+  - url: http://localhost:3334
+
+paths:
+  /cadastro-nutri:
+    post:
+      summary: Cadastra um nutricionista
+      tags:
+        - Nutricionista
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nutricionista_nome
+                - nutricionista_email
+                - nutricionista_cpf
+                - nutricionista_senha
+              properties:
+                nutricionista_nome:
+                  type: string
+                  example: Ana Paula
+                nutricionista_email:
+                  type: string
+                  example: ana@nutri.com
+                nutricionista_cpf:
+                  type: string
+                  example: "123.456.789-00"
+                nutricionista_senha:
+                  type: string
+                  example: senhaSegura123
+      responses:
+        '201':
+          description: Nutricionista cadastrado com sucesso
+        '400':
+          description: Erro de validação
+        '500':
+          description: Erro interno do servidor
+
+  /cadastro-paciente:
+    post:
+      summary: Cadastra um paciente
+      tags:
+        - Paciente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - paciente_nome
+                - paciente_email
+                - paciente_cpf
+                - paciente_senha
+              properties:
+                paciente_nome:
+                  type: string
+                  example: Ana Paula
+                paciente_email:
+                  type: string
+                  example: ana@nutri.com
+                paciente_cpf:
+                  type: string
+                  example: "123.456.789-00"
+                paciente_senha:
+                  type: string
+                  example: senhaSegura123
+      responses:
+        '201':
+          description: Paciente cadastrado com sucesso
+        '400':
+          description: Erro de validação
+        '500':
+          description: Erro interno do servidor
+
+  /login-nutri:
+    post:
+      summary: Login de nutricionista
+      tags:
+        - Nutricionista
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - nutricionista_email
+                - nutricionista_senha
+              properties:
+                nutricionista_email:
+                  type: string
+                  example: ana@nutri.com
+                nutricionista_senha:
+                  type: string
+                  example: senhaSegura123
+      responses:
+        '200':
+          description: Login realizado com sucesso
+        '401':
+          description: Credenciais inválidas
+        '500':
+          description: Erro interno
+
+  /login-paciente:
+    post:
+      summary: Login de paciente
+      tags:
+        - Paciente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - paciente_email
+                - paciente_senha
+              properties:
+                paciente_email:
+                  type: string
+                  example: joao@paciente.com
+                paciente_senha:
+                  type: string
+                  example: senhaPaciente321
+      responses:
+        '200':
+          description: Login realizado com sucesso
+        '401':
+          description: Credenciais inválidas
+        '500':
+          description: Erro interno

@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  title: API Paciente
+  version: "1.0.0"
+  description: Rotas dos pacientes
+
+servers:
+  - url: http://localhost:3334
+
+paths:
+  /listar-pacientes:
+    get:
+      summary: Lista os pacientes de um nutricionista
+      tags:
+        - Pacientes
+      responses:
+        '201':
+          description: Retorna os pacientes
+        '400':
+          description: Erro de validação
+        '500':
+          description: Erro interno do servidor
+
+  /buscar-paciente/{paciente_id}:
+    get:
+      summary: Busca os dados de um paciente pelo ID
+      tags:
+        - Paciente
+      parameters:
+        - name: paciente_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do paciente que será buscado
+      responses:
+        '200':
+          description: Dados do paciente retornados com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paciente_nome:
+                    type: string
+                  paciente_email:
+                    type: string
+                  # adicione mais campos conforme o retorno
+        '404':
+          description: Paciente não encontrado
+        '401':
+          description: Não autorizado (token inválido ou ausente)
+
+  /deletar-paciente/{paciente_id}:
+    delete:
+      summary: Deleta um paciente pelo ID
+      tags:
+        - Paciente
+      parameters:
+        - name: paciente_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do paciente a ser deletado
+      responses:
+        '200':
+          description: Paciente deletado com sucesso
+        '404':
+          description: Paciente não encontrado
+        '401':
+          description: Não autorizado
+  
+  paths:
+  /editar-paciente/{paciente_id}:
+    put:
+      summary: Edita os dados de um paciente
+      tags:
+        - Paciente
+      parameters:
+        - name: paciente_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do paciente a ser editado
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                paciente_nome:
+                  type: string
+                paciente_email:
+                  type: string
+                paciente_cpf:
+                  type: string
+      responses:
+        '200':
+          description: Paciente editado com sucesso
+        '404':
+          description: Paciente não encontrado
+        '400':
+          description: Dados inválidos
+        '401':
+          description: Não autorizado
