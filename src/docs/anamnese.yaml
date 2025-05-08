@@ -1,0 +1,87 @@
+paths:
+  /criar-anamnese/:
+    post:
+      summary: Cria uma nova anamnese
+      tags:
+        - Anamnese
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - titulo
+              properties:
+                titulo:
+                  type: string
+                  example: Histórico de lesões
+                conteudo:
+                  type: string
+                  nullable: true
+                  example: Paciente sofreu uma lesão no joelho em 2021.
+      responses:
+        '201':
+          description: Anamnese criada com sucesso
+        '400':
+          description: Erro de validação
+        '401':
+          description: Não autorizado
+
+  /editar-anamnese/{anamnese_id}:
+    put:
+      summary: Edita uma anamnese existente
+      tags:
+        - Anamnese
+      parameters:
+        - name: anamnese_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da anamnese a ser editada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - titulo
+              properties:
+                titulo:
+                  type: string
+                  example: Histórico médico atualizado
+                conteudo:
+                  type: string
+                  nullable: true
+                  example: Paciente teve alteração na pressão arterial em 2023.
+      responses:
+        '200':
+          description: Anamnese atualizada com sucesso
+        '400':
+          description: Erro de validação
+        '404':
+          description: Anamnese não encontrada
+        '401':
+          description: Não autorizado
+
+  /deletar-anamnese/{anamnese_id}:
+    delete:
+      summary: Deleta uma anamnese
+      tags:
+        - Anamnese
+      parameters:
+        - name: anamnese_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da anamnese a ser deletada
+      responses:
+        '200':
+          description: Anamnese deletada com sucesso
+        '404':
+          description: Anamnese não encontrada
+        '401':
+          description: Não autorizado

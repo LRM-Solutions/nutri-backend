@@ -1,0 +1,149 @@
+openapi: 3.0.0
+info:
+  title: API 
+  version: "1.0.0"
+  description: Rotas Antropometria Dados Basicos
+
+servers:
+  - url: http://localhost:3334
+
+paths:
+  /antropometria/{antropometria_id}/bioimpedancia:
+    post:
+      summary: Cria dados de bioimpedância vinculados a uma antropometria
+      tags:
+        - Bioimpedância
+      parameters:
+        - name: antropometria_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da antropometria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                percent_gordura:
+                  type: integer
+                  nullable: true
+                  description: Percentual de gordura (%)
+                  example: 18
+                percent_massa_magra:
+                  type: integer
+                  nullable: true
+                  description: Percentual de massa magra (%)
+                  example: 82
+                massa_gorda:
+                  type: number
+                  format: float
+                  nullable: true
+                  description: Massa gorda (kg)
+                  example: 12.5
+                massa_magra:
+                  type: number
+                  format: float
+                  nullable: true
+                  description: Massa magra (kg)
+                  example: 57.5
+                peso_osseo:
+                  type: number
+                  format: float
+                  nullable: true
+                  description: Peso ósseo (kg)
+                  example: 3.2
+                agua_corporal:
+                  type: integer
+                  nullable: true
+                  description: Água corporal total (%)
+                  example: 60
+                idade_metabolica:
+                  type: integer
+                  nullable: true
+                  description: Idade metabólica (anos)
+                  example: 25
+      responses:
+        '201':
+          description: Dados de bioimpedância criados com sucesso
+        '400':
+          description: Erro de validação ou dados incorretos
+        '404':
+          description: Antropometria não encontrada
+        '401':
+          description: Não autorizado
+
+  /antropometria/bioimpedancia/{bioimpedancia_id}:
+    put:
+      summary: Atualiza dados de bioimpedância existentes
+      tags:
+        - Bioimpedância
+      parameters:
+        - name: bioimpedancia_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da bioimpedância
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                percent_gordura:
+                  type: integer
+                  nullable: true
+                percent_massa_magra:
+                  type: integer
+                  nullable: true
+                massa_gorda:
+                  type: number
+                  format: float
+                  nullable: true
+                massa_magra:
+                  type: number
+                  format: float
+                  nullable: true
+                peso_osseo:
+                  type: number
+                  format: float
+                  nullable: true
+                agua_corporal:
+                  type: integer
+                  nullable: true
+                idade_metabolica:
+                  type: integer
+                  nullable: true
+      responses:
+        '200':
+          description: Dados de bioimpedância atualizados com sucesso
+        '400':
+          description: Dados inválidos
+        '404':
+          description: Registro não encontrado
+        '401':
+          description: Não autorizado
+
+    delete:
+      summary: Deleta dados de bioimpedância
+      tags:
+        - Bioimpedância
+      parameters:
+        - name: bioimpedancia_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da bioimpedância a ser deletada
+      responses:
+        '200':
+          description: Dados de bioimpedância deletados com sucesso
+        '404':
+          description: Registro não encontrado
+        '401':
+          description: Não autorizado
+  

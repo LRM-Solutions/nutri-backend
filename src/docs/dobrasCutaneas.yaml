@@ -1,0 +1,158 @@
+openapi: 3.0.0
+info:
+  title: API
+  version: "1.0.0"
+  description: Rotas de Dobras Cutâneas
+
+servers:
+  - url: http://localhost:3334
+
+paths:
+  /antropometria/{antropometria_id}/dobrasCutaneas:
+    post:
+      summary: Cria dados de dobras cutâneas vinculados a uma antropometria
+      tags:
+        - Dobras Cutâneas
+      parameters:
+        - name: antropometria_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da antropometria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tricipal:
+                  type: number
+                  format: float
+                  nullable: true
+                  example: 12.5
+                bicipital:
+                  type: number
+                  format: float
+                  nullable: true
+                  example: 8.3
+                subescapular:
+                  type: number
+                  format: float
+                  nullable: true
+                  example: 10.1
+                suprailiaca:
+                  type: number
+                  format: float
+                  nullable: true
+                  example: 14.0
+                abdominal:
+                  type: number
+                  format: float
+                  nullable: true
+                  example: 20.2
+                coxa:
+                  type: number
+                  format: float
+                  nullable: true
+                  example: 18.7
+                peitoral:
+                  type: number
+                  format: float
+                  nullable: true
+                  example: 15.6
+                axiliarMedia:
+                  type: number
+                  format: float
+                  nullable: true
+                  example: 11.9
+      responses:
+        '201':
+          description: Dobras cutâneas criadas com sucesso
+        '400':
+          description: Erro de validação ou dados incorretos
+        '404':
+          description: Antropometria não encontrada
+        '401':
+          description: Não autorizado
+
+  /antropometria/dobrasCutaneas/{dobraCutanea_id}:
+    put:
+      summary: Atualiza dados de dobras cutâneas existentes
+      tags:
+        - Dobras Cutâneas
+      parameters:
+        - name: dobraCutanea_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID das dobras cutâneas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tricipal:
+                  type: number
+                  format: float
+                  nullable: true
+                bicipital:
+                  type: number
+                  format: float
+                  nullable: true
+                subescapular:
+                  type: number
+                  format: float
+                  nullable: true
+                suprailiaca:
+                  type: number
+                  format: float
+                  nullable: true
+                abdominal:
+                  type: number
+                  format: float
+                  nullable: true
+                coxa:
+                  type: number
+                  format: float
+                  nullable: true
+                peitoral:
+                  type: number
+                  format: float
+                  nullable: true
+                axiliarMedia:
+                  type: number
+                  format: float
+                  nullable: true
+      responses:
+        '200':
+          description: Dobras cutâneas atualizadas com sucesso
+        '400':
+          description: Dados inválidos
+        '404':
+          description: Dobras cutâneas não encontradas
+        '401':
+          description: Não autorizado
+    
+    delete:
+      summary: Deleta dados de dobras cutâneas
+      tags:
+        - Dobras Cutâneas
+      parameters:
+        - name: dobraCutanea_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID das dobras cutâneas a serem deletadas
+      responses:
+        '200':
+          description: Dobras cutâneas deletadas com sucesso
+        '404':
+          description: Dobras cutâneas não encontradas
+        '401':
+          description: Não autorizado
