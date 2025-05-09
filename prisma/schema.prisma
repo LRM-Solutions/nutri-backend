@@ -84,6 +84,8 @@ model Antropometria {
   dadosBasicos     DadosBasicosAntropometria[]
   dobraCutanea     DobraCutanea[]
   bioimpedancia    Bioimpedancia[]
+  circunferencias  Circunferencias[]
+  diametroOsseo    DiametroOsseo[]
 }
 
 model DadosBasicosAntropometria {
@@ -101,8 +103,6 @@ model DadosBasicosAntropometria {
   antropometria    Antropometria @relation(fields: [antropometria_id], references: [antropometria_id], onDelete: Cascade)
 }
 
-
-//
 model Bioimpedancia {
   bioimpedancia_id    Int      @id @default(autoincrement())
   antropometria_id    Int @unique
@@ -133,6 +133,38 @@ model DobraCutanea {
   dataColeta       DateTime @default(now())
 
   antropometria    Antropometria @relation(fields: [antropometria_id], references: [antropometria_id], onDelete: Cascade)
+} 
+
+model Circunferencias {
+  circunferencias_id Int @id @default(autoincrement())
+  antropometria_id Int @unique
+  pescoco Float?
+  torax Float?
+  ombro Float?
+  quadril Float?
+  braco_relaxado Float?
+  braco_contraido Float?
+  cintura Float?
+  abdomen Float?
+  antebraco Float?
+  coxa_proximal Float?
+  coxa_medial Float?
+  coxa_distal Float?
+  panturrilha Float?
+  antropometria    Antropometria @relation(fields: [antropometria_id], references: [antropometria_id], onDelete: Cascade)
+}
+
+model DiametroOsseo {
+  diametroOsseo_id               Int    @id @default(autoincrement())
+  antropometria_id Int @unique
+  umero Float?
+  punho Float?
+  femur Float?
+  tornozelo Float?
+  torax Float?
+
+  antropometria    Antropometria @relation(fields: [antropometria_id], references: [antropometria_id], onDelete: Cascade)
+
 }
 
 /// ======================

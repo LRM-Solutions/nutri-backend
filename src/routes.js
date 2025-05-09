@@ -9,6 +9,8 @@ import BioImpedanciaController from "./controllers/antropometria/BioImpedanciaCo
 import AnamnesePerguntasController from "../src/controllers/anamnese/AnamnesePerguntasController.js"
 import AnamneseController from "../src/controllers/anamnese/AnamneseController.js"
 import DobrasCutaneasController from "./controllers/antropometria/DobrasCutaneasController.js";
+import CircunferenciasController from "./controllers/antropometria/CircunferenciasController.js";
+import DiametroOsseoController from "./controllers/antropometria/DiametroOsseoController.js";
 
 const routes = new Router();
 
@@ -19,7 +21,6 @@ routes.get("/", (req, res) => {
 /// ======================
 /// =       Session      =
 /// ======================
-
 
 routes.post("/cadastro-nutri", sessionController.cadastroNutri);
 routes.post("/login-nutri", sessionController.loginNutri);
@@ -151,6 +152,44 @@ routes.delete("/antropometria/dobrasCutaneas/:dobraCutanea_id",
 )
 
 /// ======================
+/// =   CIRCUNFERÊNCIA   =
+/// ======================
+
+routes.post("/antropometria/:antropometria_id/circunferencia",
+  AuthMiddleware,
+  CircunferenciasController.criar
+)
+
+routes.put("/antropometria/circunferencia/:circunferencia_id",
+  AuthMiddleware,
+  CircunferenciasController.update
+)
+  
+routes.delete("/antropometria/circunferencia/:circunferencia_id",
+  AuthMiddleware,
+  CircunferenciasController.deletar
+)
+
+/// ======================
+/// =   Diametro Osseo   =
+/// ======================
+
+routes.post("/antropometria/:antropometria_id/diametro-osseo",
+  AuthMiddleware,
+  DiametroOsseoController.criar
+)
+
+routes.put("/antropometria/diametro-osseo/:diametroOsseo_id",
+  AuthMiddleware,
+  DiametroOsseoController.update
+)
+
+routes.delete("/antropometria/diametro-osseo/:diametroOsseo_id",
+  AuthMiddleware,
+  DiametroOsseoController.delete
+)
+
+/// ======================
 /// ANAMNESE PERGUNTAS   =
 /// ======================
 
@@ -187,8 +226,6 @@ routes.delete("/deletar-anamnese/:anamnese_id",
   AuthMiddleware,
   AnamneseController.deletar
 )
-
-
 
 
 export default routes;
