@@ -181,7 +181,7 @@ model AnamnesePerguntas{
   nutricionista Nutricionista @relation(fields: [nutricionista_id], references: [nutricionista_id], onDelete: Cascade)
 }
 
-model Anamnese
+model Anamnese{
   anamnese_id Int @id @default(autoincrement())
   exame_id Int
   titulo String
