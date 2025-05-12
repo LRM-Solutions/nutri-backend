@@ -49,7 +49,16 @@ class AntropometriaController {
   
   // Pelo exame_id
   async buscarAntropometria(req,res){
+    const exame_id = parseInt(req.params.exame_id)
+    const nutri = req.userId
+    try{  
+      const Antropometria = await AntropometriaService.buscarAntropometria(exame_id, nutri);
 
+      return res.status(201).json(Antropometria);
+    }catch(error){
+      console.log(error)
+      return res.status(400).json(error)
+    }
   }
 }
 

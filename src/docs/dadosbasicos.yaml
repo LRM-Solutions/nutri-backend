@@ -113,7 +113,7 @@ paths:
                   type: number
                   format: float
                 sexo:
-                  type: string
+                  type: number
                   nullable: true
                 relatorioAnexo:
                   type: string

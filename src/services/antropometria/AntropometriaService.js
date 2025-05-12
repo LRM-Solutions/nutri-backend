@@ -66,6 +66,30 @@ class AntropometriaService {
 
     return deletedAntropometria;
   }
+  async buscarAntropometria(exame_id, nutricionista_id){
+    try{
+      const antropometria = await prisma.antropometria.findUnique({
+        where:{
+          exame_id: exame_id
+        },
+        include:{
+          dadosBasicos: true,
+          bioimpedancia: true,
+          dobraCutanea: true,
+          circunferencias: true,
+          diametroOsseo: true
+        }
+      });
+      
+      console.log(antropometria)
+
+      return antropometria
+
+    }catch(error){
+      console.log(error)
+      throw new Error("Erro ao buscar Antropometria")
+    }
+  }
 }
 
 export default new AntropometriaService();

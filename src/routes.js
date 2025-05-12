@@ -11,6 +11,7 @@ import AnamneseController from "../src/controllers/anamnese/AnamneseController.j
 import DobrasCutaneasController from "./controllers/antropometria/DobrasCutaneasController.js";
 import CircunferenciasController from "./controllers/antropometria/CircunferenciasController.js";
 import DiametroOsseoController from "./controllers/antropometria/DiametroOsseoController.js";
+import GastosEnergeticosController from "./controllers/GastosEnergeticosController.js"
 
 const routes = new Router();
 
@@ -89,6 +90,11 @@ routes.post("/exames/:exame_id/criar-antropometria",
 routes.delete("/exames/deletar-antropometria/:antropometria_id",
   AuthMiddleware,
   AntropometriaController.deletarAntropometria
+);
+
+routes.get("/exames/antropometria/get-antropometria-by-exame/:exame_id",
+  AuthMiddleware,
+  AntropometriaController.buscarAntropometria
 );
 
 
@@ -226,6 +232,32 @@ routes.delete("/deletar-anamnese/:anamnese_id",
   AuthMiddleware,
   AnamneseController.deletar
 )
+
+/// ======================
+///  =     Gastos Energ    =
+/// ======================
+
+routes.get("exame/:exame_id/gastos-energeticos",
+  AuthMiddleware,
+  GastosEnergeticosController.get_by_exame_id
+)
+
+routes.post("exame/:exame_id/gastos-energeticos", 
+  AuthMiddleware, 
+  GastosEnergeticosController.create
+)
+
+routes.put("exame/gastos-energeticos/:gastos_id",
+  AuthMiddleware,
+  GastosEnergeticosController.update
+)
+
+routes.delete("exame/gastos-energeticos/:gastos_id",
+  AuthMiddleware,
+  GastosEnergeticosController.delete
+)
+
+
 
 
 export default routes;

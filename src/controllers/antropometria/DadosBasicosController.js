@@ -11,7 +11,7 @@ class DadosBasicosController {
       alturaSentado: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       alturaJoelho: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       peso: Yup.number().typeError("Erro! Precisa ser um valor quebrado!"),
-      sexo: Yup.string().nullable().notRequired(),
+      sexo: Yup.number().nullable().notRequired(),
       relatorioAnexo: Yup.string().nullable().notRequired(), // Vai armazenar o caminho até uploads
     });
     const antropometria_id = parseInt(req.params.antropometria_id)
@@ -48,7 +48,7 @@ class DadosBasicosController {
       alturaSentado: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       alturaJoelho: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       peso: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      sexo: Yup.string().nullable().notRequired(),
+      sexo: Yup.number().nullable().notRequired(),
       relatorioAnexo: Yup.string().nullable().notRequired(),
     });
 

@@ -1,0 +1,153 @@
+paths:
+  /antropometria/{antropometria_id}/circunferencia:
+    post:
+      summary: Cria uma nova entrada de circunferência para uma antropometria
+      tags:
+        - Circunferências
+      parameters:
+        - name: antropometria_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da antropometria associada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pescoco:
+                  type: number
+                  nullable: true
+                torax:
+                  type: number
+                  nullable: true
+                ombro:
+                  type: number
+                  nullable: true
+                quadril:
+                  type: number
+                  nullable: true
+                braco_relaxado:
+                  type: number
+                  nullable: true
+                braco_contraido:
+                  type: number
+                  nullable: true
+                cintura:
+                  type: number
+                  nullable: true
+                abdomen:
+                  type: number
+                  nullable: true
+                antebraco:
+                  type: number
+                  nullable: true
+                coxa_proximal:
+                  type: number
+                  nullable: true
+                coxa_medial:
+                  type: number
+                  nullable: true
+                coxa_distal:
+                  type: number
+                  nullable: true
+                panturrilha:
+                  type: number
+                  nullable: true
+      responses:
+        '201':
+          description: Circunferência criada com sucesso
+        '400':
+          description: Erro de validação
+        '401':
+          description: Não autorizado
+
+  /antropometria/circunferencia/{circunferencia_id}:
+    put:
+      summary: Atualiza os dados de uma circunferência existente
+      tags:
+        - Circunferências
+      parameters:
+        - name: circunferencia_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da circunferência a ser atualizada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pescoco:
+                  type: number
+                  nullable: true
+                torax:
+                  type: number
+                  nullable: true
+                ombro:
+                  type: number
+                  nullable: true
+                quadril:
+                  type: number
+                  nullable: true
+                braco_relaxado:
+                  type: number
+                  nullable: true
+                braco_contraido:
+                  type: number
+                  nullable: true
+                cintura:
+                  type: number
+                  nullable: true
+                abdomen:
+                  type: number
+                  nullable: true
+                antebraco:
+                  type: number
+                  nullable: true
+                coxa_proximal:
+                  type: number
+                  nullable: true
+                coxa_medial:
+                  type: number
+                  nullable: true
+                coxa_distal:
+                  type: number
+                  nullable: true
+                panturrilha:
+                  type: number
+                  nullable: true
+      responses:
+        '200':
+          description: Circunferência atualizada com sucesso
+        '400':
+          description: Erro de validação
+        '404':
+          description: Circunferência não encontrada
+        '401':
+          description: Não autorizado
+
+    delete:
+      summary: Deleta uma entrada de circunferência
+      tags:
+        - Circunferências
+      parameters:
+        - name: circunferencia_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da circunferência a ser deletada
+      responses:
+        '200':
+          description: Circunferência deletada com sucesso
+        '404':
+          description: Circunferência não encontrada
+        '401':
+          description: Não autorizado

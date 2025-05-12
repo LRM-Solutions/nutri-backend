@@ -1,0 +1,105 @@
+paths:
+  /antropometria/{antropometria_id}/diametro-osseo:
+    post:
+      summary: Cria um novo registro de diâmetro ósseo para uma antropometria
+      tags:
+        - Diâmetro Ósseo
+      parameters:
+        - name: antropometria_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID da antropometria associada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                umero:
+                  type: number
+                  nullable: true
+                punho:
+                  type: number
+                  nullable: true
+                femur:
+                  type: number
+                  nullable: true
+                tornozelo:
+                  type: number
+                  nullable: true
+                torax:
+                  type: number
+                  nullable: true
+      responses:
+        '201':
+          description: Diâmetro ósseo criado com sucesso
+        '400':
+          description: Erro de validação
+        '401':
+          description: Não autorizado
+
+  /antropometria/diametro-osseo/{diametroOsseo_id}:
+    put:
+      summary: Atualiza um registro de diâmetro ósseo existente
+      tags:
+        - Diâmetro Ósseo
+      parameters:
+        - name: diametroOsseo_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do diâmetro ósseo a ser atualizado
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                umero:
+                  type: number
+                  nullable: true
+                punho:
+                  type: number
+                  nullable: true
+                femur:
+                  type: number
+                  nullable: true
+                tornozelo:
+                  type: number
+                  nullable: true
+                torax:
+                  type: number
+                  nullable: true
+      responses:
+        '200':
+          description: Diâmetro ósseo atualizado com sucesso
+        '400':
+          description: Erro de validação
+        '404':
+          description: Registro não encontrado
+        '401':
+          description: Não autorizado
+
+    delete:
+      summary: Deleta um registro de diâmetro ósseo
+      tags:
+        - Diâmetro Ósseo
+      parameters:
+        - name: diametroOsseo_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID do diâmetro ósseo a ser deletado
+      responses:
+        '200':
+          description: Diâmetro ósseo deletado com sucesso
+        '404':
+          description: Registro não encontrado
+        '401':
+          description: Não autorizado

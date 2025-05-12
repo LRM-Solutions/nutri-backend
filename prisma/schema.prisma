@@ -67,7 +67,7 @@ model Exame {
   Paciente         Paciente      @relation(fields: [paciente_id], references: [paciente_id])
   antropometrica Antropometria[]
   anamnese Anamnese[]
-
+  gastoEnergetico GastosEnergeticos[]
 }
 
 /// ======================
@@ -96,7 +96,7 @@ model DadosBasicosAntropometria {
   alturaSentado    Float?
   alturaJoelho     Float?
   peso             Float
-  sexo             String?
+  sexo             Int?
   relatorioAnexo   String?
   dataColeta       DateTime @default(now())
 
@@ -181,7 +181,7 @@ model AnamnesePerguntas{
   nutricionista Nutricionista @relation(fields: [nutricionista_id], references: [nutricionista_id], onDelete: Cascade)
 }
 
-model Anamnese{
+model Anamnese
   anamnese_id Int @id @default(autoincrement())
   exame_id Int
   titulo String
@@ -198,7 +198,7 @@ model Anamnese{
 
 model GastosEnergeticos{
   gasto_energetico_id Int @id @default(autoincrement())
-  // antropometria_id <=> ele vai so importar dados então talvez não precise ter relação no banco
+  exame_id Int
   fator_atividade Int
   tmb Float
   get Float
@@ -207,4 +207,6 @@ model GastosEnergeticos{
   observacoes String?
 
   data DateTime @default(now())
+
+  exame Exame @relation(fields: [exame_id], references: [exame_id], onDelete: Cascade)
 }
