@@ -4,11 +4,11 @@ class GastosEnergeticosController{
   async create(req,res){
     const exame_id = parseInt(req.params.exame_id)
 
-    const schema = Yup.object
+    
 
     try{
 
-      const 
+      
 
     }catch(error){
       console.log(error)

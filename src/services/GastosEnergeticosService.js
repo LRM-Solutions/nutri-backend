@@ -26,4 +26,4 @@ class GastosEnergeticosService{
 
 
 
-export default new GastosEnergeticosServices()
+export default new GastosEnergeticosService()
