@@ -20,7 +20,6 @@ model Nutricionista {
   assinaturas         Assinatura[]
   exames              Exame[]
   pacientes           Paciente[]
-  anamneseperguntas   AnamnesePerguntas[]
 }
 
 /// ======================
@@ -81,11 +80,11 @@ model Antropometria {
   
   Exame            Exame @relation(fields: [exame_id], references: [exame_id])
   
-  dadosBasicos     DadosBasicosAntropometria[]
-  dobraCutanea     DobraCutanea[]
-  bioimpedancia    Bioimpedancia[]
-  circunferencias  Circunferencias[]
-  diametroOsseo    DiametroOsseo[]
+  dadosBasicos     DadosBasicosAntropometria?
+  dobraCutanea     DobraCutanea?
+  bioimpedancia    Bioimpedancia?
+  circunferencias  Circunferencias?
+  diametroOsseo    DiametroOsseo?
 }
 
 model DadosBasicosAntropometria {
@@ -138,19 +137,28 @@ model DobraCutanea {
 model Circunferencias {
   circunferencias_id Int @id @default(autoincrement())
   antropometria_id Int @unique
+
+  Braco_esq_relaxado Float?
+  Braco_dir_relaxado Float?
+  Braco_esq_contraido Float?
+  Braco_dir_contraido Float?
+  Antebraco_esq Float?
+  Antebraco_dir Float?
+  punho_esq Float?
+  punho_dir Float?
   pescoco Float?
-  torax Float?
   ombro Float?
-  quadril Float?
-  braco_relaxado Float?
-  braco_contraido Float?
+  peitoral Float?
   cintura Float?
   abdomen Float?
-  antebraco Float?
-  coxa_proximal Float?
-  coxa_medial Float?
-  coxa_distal Float?
-  panturrilha Float?
+  quadril Float?
+  panturrilha_es Float?
+  panturrilha_dir Float?
+  coxa_esq Float? 
+  coxa_dir Float?
+  coxa_proximal_esq Float?
+  coxa_proximal_dir Float?
+
   antropometria    Antropometria @relation(fields: [antropometria_id], references: [antropometria_id], onDelete: Cascade)
 }
 
@@ -170,16 +178,6 @@ model DiametroOsseo {
 /// ======================
 /// =      Anamnesse     =
 /// ======================
-
-model AnamnesePerguntas{
-  anamnesePerguntas_id Int @id @default(autoincrement())
-  nutricionista_id Int 
-  titulo String
-  conteudo String?
-  data    DateTime @default(now())
-
-  nutricionista Nutricionista @relation(fields: [nutricionista_id], references: [nutricionista_id], onDelete: Cascade)
-}
 
 model Anamnese{
   anamnese_id Int @id @default(autoincrement())
