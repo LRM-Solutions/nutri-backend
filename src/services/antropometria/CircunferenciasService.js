@@ -33,6 +33,17 @@ class CircunferenciasService {
   async update(data, circunferencia_id, nutricionista_id){
     console.log(circunferencia_id)
     try{
+
+      const alreadyexists = await prisma.circunferencias.findUnique({
+        where:{
+          circunferencias_id: circunferencia_id
+        }
+      });
+
+      if(!alreadyexists){
+        throw new Error("Esse registro de circunferência não existe pra ser atualizado!")
+      }
+
       const circunferencia = await prisma.circunferencias.update({
         where:{
           circunferencias_id: circunferencia_id
@@ -43,7 +54,7 @@ class CircunferenciasService {
       return circunferencia;
     }catch(error){
       console.log(error)
-      throw new Error("Erro ao criar CircunferÊncia")
+      throw new Error("Esse registro de circunferência não existe pra ser atualizado!")
     }
   }
   async deletar(nutricionista_id, circunferencia_id){

@@ -7,19 +7,26 @@ class CircunferenciasController {
     const nutricionista_id = req.userId
 
     const schema = Yup.object().shape({
+      braco_esq_relaxado: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      braco_dir_relaxado: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      braco_esq_contraido: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      braco_dir_contraido: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      antebraco_esq: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      antebraco_dir: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      punho_esq: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      punho_dir: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       pescoco: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      torax: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       ombro: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      quadril: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      braco_relaxado: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      braco_contraido: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      peitoral: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       cintura: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       abdomen: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      antebraco: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      coxa_proximal: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      coxa_medial: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      coxa_distal: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      panturrilha: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      quadril: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      panturrilha_es: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      panturrilha_dir: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      coxa_esq: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      coxa_dir: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      coxa_proximal_esq: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      coxa_proximal_dir: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
     });
 
     try{
@@ -38,19 +45,26 @@ class CircunferenciasController {
     const nutricionista_id = req.userId
 
     const schema = Yup.object().shape({
+      braco_esq_relaxado: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      braco_dir_relaxado: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      braco_esq_contraido: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      braco_dir_contraido: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      antebraco_esq: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      antebraco_dir: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      punho_esq: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      punho_dir: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       pescoco: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      torax: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       ombro: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      quadril: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      braco_relaxado: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      braco_contraido: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      peitoral: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       cintura: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
       abdomen: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      antebraco: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      coxa_proximal: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      coxa_medial: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      coxa_distal: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
-      panturrilha: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      quadril: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      panturrilha_es: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      panturrilha_dir: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      coxa_esq: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      coxa_dir: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      coxa_proximal_esq: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
+      coxa_proximal_dir: Yup.number().typeError("Erro! Precisa ser um valor quebrado!").nullable().notRequired(),
     });
 
     try{
@@ -60,7 +74,6 @@ class CircunferenciasController {
 
       return res.status(201).json(Circunferencias)
     }catch(error){
-      console.log(error)
       return res.status(400).json(error);
     }
   }
